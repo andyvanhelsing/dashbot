@@ -136,7 +136,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     if (that.outgoingIntent) {
       data.intent = that.outgoingIntent;
     }
-    data.message.data.google.userStorage = JSON.stringify(JSON.parse(data.message.data.google.userStorage).data);
+    data.message.payload.google.userStorage = JSON.stringify(JSON.parse(data.message.payload.google.userStorage).data);
     internalLogOutgoing(data, 'npm');
   };
 
