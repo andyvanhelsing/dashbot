@@ -126,7 +126,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
   that.logOutgoing = function(requestBody, message, metadata) {
     var timestamp = new Date().getTime();
     message = JSON.parse(JSON.stringify(message));
-    message.payload.google.userStorage = JSON.stringify(JSON.parse(data.message.payload.google.userStorage).data);
+    message.payload.google.userStorage = JSON.stringify(JSON.parse(message.payload.google.userStorage).data);
     var data = {
       dashbot_timestamp: timestamp,
       request_body:requestBody,
