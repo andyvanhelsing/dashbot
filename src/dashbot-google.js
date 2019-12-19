@@ -125,6 +125,8 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
 
   that.logOutgoing = function(requestBody, message, metadata) {
     var timestamp = new Date().getTime();
+    message = JSON.parse(JSON.stringify(message));
+    message.payload.google.userStorage = JSON.stringify(JSON.parse(data.message.payload.google.userStorage).data);
     var data = {
       dashbot_timestamp: timestamp,
       request_body:requestBody,
@@ -136,7 +138,6 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     if (that.outgoingIntent) {
       data.intent = that.outgoingIntent;
     }
-    data.message.payload.google.userStorage = JSON.stringify(JSON.parse(data.message.payload.google.userStorage).data);
     internalLogOutgoing(data, 'npm');
   };
 
