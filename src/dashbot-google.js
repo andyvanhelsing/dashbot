@@ -81,6 +81,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     if (that.debug) {
       console.log('Dashbot Outgoing: ' + url);
       console.log(JSON.stringify(data, null, 2));
+      console.log(data.message);
     }
     return makeRequest({
       uri: url,
