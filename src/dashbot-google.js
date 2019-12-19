@@ -67,6 +67,8 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     if (that.debug) {
       console.log('Dashbot Incoming: ' + url);
       console.log(JSON.stringify(data, null, 2));
+      console.log(data.message);
+      console.log(data.metadata);
     }
     return makeRequest({
       uri: url,
@@ -82,6 +84,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
       console.log('Dashbot Outgoing: ' + url);
       console.log(JSON.stringify(data, null, 2));
       console.log(data.message);
+      console.log(data.metadata);
     }
     return makeRequest({
       uri: url,
@@ -116,6 +119,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     if (intent) {
       data.intent = intent
     }
+    // data.message.data.google.userStorage = JSON.stringify(JSON.parse(data.message.data.google.userStorage).data);
     internalLogIncoming(data, 'npm');
   };
 
@@ -132,6 +136,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     if (that.outgoingIntent) {
       data.intent = that.outgoingIntent;
     }
+    data.message.data.google.userStorage = JSON.stringify(JSON.parse(data.message.data.google.userStorage).data);
     internalLogOutgoing(data, 'npm');
   };
 
