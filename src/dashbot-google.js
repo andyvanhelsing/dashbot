@@ -131,7 +131,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
   that.logOutgoing = function(requestBody, message, metadata) {
     var timestamp = new Date().getTime();
     message = JSON.parse(JSON.stringify(message));
-    var rawUserStorage = message.payload.google.userStorage;
+    var rawUserStorage = message.payload && message.payload.google.userStorage;
     if (rawUserStorage) {
       var userStorage = JSON.parse(rawUserStorage);
       userStorage.dashbotUser = {userId: userStorage.data.dashbotId};
