@@ -108,9 +108,12 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
   that.logIncoming = function(requestBody, metadata, intent) {
     var timestamp = new Date().getTime();
     requestBody = JSON.parse(JSON.stringify(requestBody));
-    var userStorage = JSON.parse(requestBody.originalDetectIntentRequest.payload.user.userStorage);
-    userStorage.dashbotUser = {userId: userStorage.data.dashbotId};
-    requestBody.originalDetectIntentRequest.payload.user.userStorage = JSON.stringify(userStorage);
+    var rawStorage = requestBody.originalDetectIntentRequest.payload.user.userStorage;
+    if (rawStorage) {
+      var userStorage = JSON.parse(rawStorage);
+      userStorage.dashbotUser = {userId: userStorage.data.dashbotId};
+      requestBody.originalDetectIntentRequest.payload.user.userStorage = JSON.stringify(userStorage);
+    }
     var data = {
       dashbot_timestamp: timestamp,
       request_body:requestBody
@@ -128,9 +131,12 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
   that.logOutgoing = function(requestBody, message, metadata) {
     var timestamp = new Date().getTime();
     message = JSON.parse(JSON.stringify(message));
-    var userStorage = JSON.parse(message.payload.google.userStorage);
-    userStorage.dashbotUser = {userId: userStorage.data.dashbotId};
-    message.payload.google.userStorage = JSON.stringify(userStorage);
+    var rawUserStorage = message.payload.google.userStorage;
+    if (rawUserStorage) {
+      var userStorage = JSON.parse(rawUserStorage);
+      userStorage.dashbotUser = {userId: userStorage.data.dashbotId};
+      message.payload.google.userStorage = JSON.stringify(userStorage);
+    }
     var data = {
       dashbot_timestamp: timestamp,
       request_body:requestBody,
