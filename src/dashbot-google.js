@@ -110,7 +110,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     var rawStorage = requestBody.originalDetectIntentRequest.payload.user.userStorage;
     if (rawStorage) {
       var userStorage = JSON.parse(rawStorage);
-      userStorage.dashbotUser = {userId: userStorage.data.dashbotId};
+      userStorage.dashbotUser = {userId: userStorage.data.googleUserId || userStorage.data.dashbotId};
       requestBody.originalDetectIntentRequest.payload.user.userStorage = JSON.stringify(userStorage);
     }
     var data = {
@@ -132,7 +132,7 @@ function DashBotGoogle(apiKey, urlRoot, debug, printErrors, config) {
     var rawUserStorage = message.payload && message.payload.google.userStorage;
     if (rawUserStorage) {
       var userStorage = JSON.parse(rawUserStorage);
-      userStorage.dashbotUser = {userId: userStorage.data.dashbotId};
+      userStorage.dashbotUser = {userId: userStorage.data.googleUserId || userStorage.data.dashbotId};
       message.payload.google.userStorage = JSON.stringify(userStorage);
     }
     var data = {
